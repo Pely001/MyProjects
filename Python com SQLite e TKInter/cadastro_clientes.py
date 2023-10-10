@@ -1,3 +1,4 @@
+##IMPORTANDO AS BIBLIOTECAS
 from tkinter import *
 import sqlite3
 import pandas as pd
@@ -20,6 +21,7 @@ try:
     telefone text NOT NULL PRIMARY KEY,
     email text
     )''')
+ ###ERRO APRESENTADO SE A TABELA JÁ EXISTIR   
 except sqlite3.Error as erro:
     print('ERRO: ', erro)
 
@@ -46,13 +48,14 @@ try:
                     'telefone': entry_telefone.get(),
                     'email': entry_email.get()
                    })
+        ###CONFIRMANDO ALTERAÇÕES E FECHANDO A CONEXÃO COM O BANCO DE DADOS          
         conexao.commit()
         conexao.close()
 
 
         messagebox.showinfo('','Linha Incluida')
 
-#LIMPANDO A TELA
+#LIMPANDO A TELA PARA QUE UM NOVO REGISTRO POSSA SER INCLUIDO
         entry_nome.delete(0,"end")
         entry_sobrenome.delete(0,"end")
         entry_telefone.delete(0,"end")
@@ -60,7 +63,7 @@ try:
 except:
     messagebox.showerror("ERRO")
 
-#EXPORTANDO DADOS PARA PLANILHA EXCEL
+#EXPORTANDO DADOS PARA PLANILHA FORMATO .XLSX
 try:
     def exportar_pessoa():
         conexao = sqlite3.connect("Meu_Banco.db")
